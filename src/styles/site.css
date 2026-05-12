@@ -1,0 +1,576 @@
+/* Lasisi Lab UI kit — site styles
+   Mirrors hugo-academic conventions on top of the design tokens. */
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);   /* the page IS the kiss — indigo kiss in light, dark kiss in dark */
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-relaxed);
+}
+
+.ll-container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Layout: sidebar (desktop) / stacked (mobile) ---------- */
+.ll-layout { min-height: 100vh; }
+.ll-content { min-height: 100vh; }
+
+/* ---------- Sidebar (identity + nav) — base / mobile styles first ---------- */
+.ll-sidebar {
+  position: relative;
+  background: var(--bg-hero);
+  color: var(--paper);
+  overflow: hidden;
+  padding: 56px 36px 40px;
+}
+
+/* Desktop layout overrides come AFTER the base rule so the cascade keeps
+   `position: fixed` instead of getting clobbered by the base `position: relative`. */
+@media (min-width: 980px) {
+  .ll-layout { display: grid; grid-template-columns: 360px 1fr; }
+  .ll-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 360px;
+    height: 100vh;
+    overflow-y: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .ll-sidebar__inner {
+    position: relative;
+    padding-top: 36px;
+    padding-bottom: 40px;
+  }
+  /* A fixed grid item is removed from grid placement, so the remaining
+     child (.ll-content) would auto-place into column 1. Force it into
+     column 2 so it sits beside the fixed sidebar. */
+  .ll-content { min-width: 0; grid-column: 2; }
+  /* Note: the .ll-header { left: 360px } override lives further down,
+     AFTER the base .ll-header rule, so it isn't clobbered by the cascade. */
+}
+.ll-sidebar__branch {
+  position: absolute;
+  top: -6%; right: -12%;
+  width: 70%; aspect-ratio: 1 / 1;
+  -webkit-mask: url(pattern-branches-mask.png) no-repeat top right / contain;
+          mask: url(pattern-branches-mask.png) no-repeat top right / contain;
+  background-color: var(--paper);
+  opacity: 0.10;
+  pointer-events: none;
+}
+.ll-sidebar::after {
+  /* a thin pink accent rail on the inside edge — matches old hero's bottom bar */
+  content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 3px;
+  background: linear-gradient(180deg, var(--pink-600) 0%, var(--pink-400) 50%, var(--teal-400) 100%);
+  opacity: 0.85;
+}
+.ll-sidebar__inner { position: relative; display: flex; flex-direction: column; gap: 0; }
+.ll-sidebar__avatar {
+  width: 180px; height: 180px; border-radius: 50%; object-fit: cover;
+  border: 4px solid var(--paper); box-shadow: var(--shadow-md);
+  margin: 0 0 22px;
+  display: block;
+}
+.ll-sidebar__eyebrow { color: var(--pink-300); margin-bottom: 6px; }
+.ll-sidebar__name {
+  font: 600 34px/1.15 var(--font-display); letter-spacing: 0.04em;
+  color: var(--paper); margin: 0 0 10px;
+}
+.ll-sidebar__role { font-size: 18px; line-height: 1.55; color: rgba(255,255,255,0.84); margin: 0 0 4px; }
+.ll-sidebar__role a { color: var(--pink-300); border-bottom-color: rgba(218,148,188,0.4); }
+.ll-sidebar__role a:hover { color: var(--pink-200); border-bottom-color: var(--pink-300); }
+.ll-sidebar__bio {
+  font-size: 14.5px; line-height: 1.6; max-width: 38ch; margin: 0 0 18px;
+  color: rgba(255,255,255,0.88);
+}
+.ll-sidebar__interests { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.ll-sidebar__interests li {
+  font: 500 10.5px/1 var(--font-ui); letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--paper); background: rgba(255,255,255,0.06);
+  padding: 7px 10px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+}
+.ll-sidebar__socials { display: flex; gap: 8px; margin-bottom: 28px; }
+.ll-sidebar__socials a {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center;
+  color: var(--paper); background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  transition: all 200ms;
+}
+.ll-sidebar__socials a:hover { background: var(--pink-600); border-color: var(--pink-600); transform: translateY(-1px); }
+
+/* sidebar nav (replaces the top header on desktop) */
+.ll-sidebar__nav {
+  display: flex; flex-direction: column;
+  margin: 8px 0 24px;
+  padding: 18px 0 4px;
+  border-top: 1px solid rgba(255,255,255,0.14);
+}
+.ll-sidebar__link {
+  font: 500 12.5px/1 var(--font-ui); letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
+  padding: 12px 0;
+  border: 0;
+  position: relative;
+  transition: color 180ms, padding-left 220ms;
+}
+.ll-sidebar__link::before {
+  content: ""; position: absolute; left: -36px; top: 50%;
+  width: 28px; height: 1px; background: var(--pink-300);
+  transform: translateY(-50%) scaleX(0); transform-origin: right center;
+  transition: transform 240ms;
+}
+.ll-sidebar__link:hover { color: var(--paper); border: 0; padding-left: 8px; }
+.ll-sidebar__link:hover::before { transform: translateY(-50%) scaleX(1); }
+.ll-sidebar__link.is-active { color: var(--paper); padding-left: 8px; }
+.ll-sidebar__link.is-active::before { transform: translateY(-50%) scaleX(1); }
+
+.ll-sidebar__foot {
+  font: 400 11px/1.4 var(--font-mono); letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.42);
+  margin: auto 0 0;
+  padding-top: 24px;
+}
+
+/* ---------- Header (full-width, bridges sidebar + content) ----------
+   Translucent veil over the page kiss + sidebar gradient. No brand mark —
+   the sidebar already carries identity; the header is pure navigation. */
+.ll-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;     /* nav lives on the right */
+  height: 64px;
+  padding: 0 32px;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid rgba(5,57,67,0.06);
+}
+.ll-header__nav { display: flex; gap: 6px; align-items: center; }
+.ll-header__link {
+  position: relative;
+  font: 500 13px/1 var(--font-ui);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-700);
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 0;
+  transition: color 200ms;
+}
+.ll-header__link:hover { color: var(--teal-700); border: 0; }
+.ll-header__link.is-active { color: var(--teal-700); }
+.ll-header__link.is-active::after {
+  content: ""; position: absolute; left: 12px; right: 12px; bottom: 4px;
+  height: 2px; background: var(--teal-700); border-radius: 2px;
+}
+
+/* On desktop, float the header only over the content column so the
+   sidebar avatar isn't clipped by the translucent header bar. */
+@media (min-width: 980px) {
+  .ll-header { left: 360px; }
+}
+
+/* ---------- Hero ---------- */
+.ll-hero {
+  position: relative;
+  background: var(--bg-hero);      /* H4 · teal-900 → indigo-700 in light, G · indigo breathing in dark */
+  color: var(--paper);
+  overflow: hidden;
+  padding: 80px 32px 88px;
+}
+/* Branch motif: transparent, drawn in white via mask (no PNG box) */
+.ll-hero__branch {
+  position: absolute;
+  top: -8%; right: -6%;
+  width: 44%; aspect-ratio: 1 / 1;
+  -webkit-mask: url(pattern-branches-mask.png) no-repeat top right / contain;
+          mask: url(pattern-branches-mask.png) no-repeat top right / contain;
+  background-color: var(--paper);
+  opacity: 0.16;
+  pointer-events: none;
+}
+/* A pink accent bar so the secondary colour shows up immediately */
+.ll-hero::before {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--pink-600) 0%, var(--pink-400) 60%, var(--teal-400) 100%);
+}
+.ll-hero__inner { position: relative; max-width: 880px; margin: 0 auto; display: grid; grid-template-columns: 220px 1fr; gap: 36px; align-items: start; }
+.ll-hero__avatar { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 4px solid var(--paper); box-shadow: var(--shadow-md); }
+.ll-hero .eyebrow { color: var(--pink-400); }
+.ll-hero__name { font: 600 44px/1.1 var(--font-display); letter-spacing: 0.05em; color: var(--paper); margin: 8px 0 8px; }
+.ll-hero__role { font-size: 16px; color: rgba(255,255,255,0.82); margin: 0 0 18px; }
+.ll-hero__role a { color: var(--pink-400); border-bottom-color: rgba(217,75,134,0.4); }
+.ll-hero__role a:hover { color: var(--pink-200); border-bottom-color: var(--pink-400); }
+.ll-hero__bio { font-size: 17px; line-height: 1.65; max-width: 56ch; margin: 0 0 18px; color: rgba(255,255,255,0.88); }
+.ll-hero__interests { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.ll-hero__interests li {
+  font: 500 12px/1 var(--font-ui); letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--paper); background: rgba(255,255,255,0.06); padding: 8px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.ll-hero__socials { display: flex; gap: 10px; }
+.ll-hero__socials a {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center;
+  color: var(--paper); background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+  transition: all 200ms;
+}
+.ll-hero__socials a:hover { color: var(--paper); background: var(--pink-600); border-color: var(--pink-600); transform: translateY(-1px); }
+
+/* ---------- Sections ---------- */
+.ll-section { padding: 80px 32px; max-width: 980px; margin: 0 auto; }
+.ll-section--alt { background: transparent; max-width: none; padding-left: 0; padding-right: 0; }  /* let the page kiss show through — articulate sections with type + spacing, not new ground */
+.ll-section--alt .ll-section__head, .ll-section--alt .ll-publist { max-width: 980px; margin-left: auto; margin-right: auto; padding-left: 32px; padding-right: 32px; }
+.ll-section__head { margin-bottom: 36px; }
+.ll-section__title { font: 600 34px/1.15 var(--font-display); letter-spacing: 0.04em; color: var(--fg-strong); margin: 6px 0 0; }
+
+/* ---------- Tags / chips ---------- */
+.eyebrow { font: 500 11px/1 var(--font-ui); letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal-700); margin: 0; }
+.ll-tag { display: inline-flex; align-items: center; gap: 6px; font: 500 11px/1 var(--font-ui); letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 11px; border-radius: 999px; }
+.ll-tag--teal { color: var(--teal-900); background: var(--teal-100); }
+.ll-tag--pink { color: #7A1F49; background: var(--pink-100); }
+
+/* ---------- Post list ---------- */
+.ll-postlist { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.ll-postlist__item {
+  background: var(--surface-card);
+  -webkit-backdrop-filter: var(--surface-card-blur);
+          backdrop-filter: var(--surface-card-blur);
+  border: 1px solid var(--surface-card-border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  cursor: pointer;
+  box-shadow: var(--surface-card-shadow);
+  transition: box-shadow 200ms, transform 200ms, background 200ms;
+  position: relative; overflow: hidden; }
+.ll-postlist__item:hover { box-shadow: 0 2px 4px rgba(15,23,42,0.06), 0 18px 44px rgba(15,23,42,0.10); transform: translateY(-1px); }
+.ll-postlist__meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.ll-postlist__date { font: 400 12px var(--font-body); color: var(--fg-muted); }
+.ll-postlist__title { font: 600 22px/1.25 var(--font-display); color: var(--fg-strong); margin: 0 0 8px; }
+.ll-postlist__summary { margin: 0 0 12px; color: var(--fg); }
+.ll-postlist__more { font: 500 12px var(--font-ui); letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink-600); display: inline-flex; align-items: center; gap: 8px; }
+.ll-postlist__item:hover .ll-postlist__more i { transform: translateX(2px); }
+.ll-postlist__more i { transition: transform 200ms; }
+
+/* ---------- Publications ---------- */
+.ll-publist { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; }
+.ll-publist__item { display: grid; grid-template-columns: 80px 1fr; gap: 20px; padding: 20px 0; border-top: 1px solid var(--divider); }
+.ll-publist__item:first-child { border-top: 0; padding-top: 0; }
+.ll-publist__year { font: 600 28px/1 var(--font-display); color: var(--teal-700); letter-spacing: 0.04em; }
+.ll-publist__type { font: 500 11px/1 var(--font-ui); letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: 6px; }
+.ll-publist__title { font: 600 18px/1.3 var(--font-display); color: var(--teal-900); margin: 0 0 6px; }
+.ll-publist__title a { color: inherit; border: 0; }
+.ll-publist__title a:hover { color: var(--pink-600); border: 0; }
+.ll-publist__meta { font-size: 14px; color: var(--fg-muted); margin-bottom: 10px; }
+.ll-publist__actions { display: flex; gap: 14px; }
+.ll-publist__actions a { font: 500 12px var(--font-ui); letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-700); display: inline-flex; align-items: center; gap: 6px; border: 0; }
+.ll-publist__actions a:hover { color: var(--pink-600); border: 0; }
+
+/* ---------- Page-wide branch backdrop ----------
+   Lives on the content column as a non-interactive layer. Sized large enough to
+   read as page atmosphere rather than a corner motif. Fixed in viewport so it
+   stays as you scroll. */
+.ll-content { position: relative; }
+.ll-content::before {
+  content: "";
+  position: fixed;
+  bottom: 0;
+  right: 10%;
+  width: 126vh;
+  height: 126vh;
+  background: url(branch-anchor.png) no-repeat center / contain;
+  opacity: 0.0382;
+  pointer-events: none;
+  z-index: 0;
+  /* rotate 90° clockwise so the branch root anchors at the bottom-right
+     corner; translate pushes the root off-screen so only the limbs show */
+  transform: rotate(90deg) translate(38%, -38%);
+  transform-origin: center;
+}
+/* Lift content above the .ll-content::before branch pseudo, but skip
+   .ll-header so its `position: fixed` survives the cascade. */
+.ll-content > *:not(.ll-header) { position: relative; z-index: 1; }
+[data-theme="dark"] .ll-content::before { opacity: 0.28; }
+
+/* ---------- More / link-out section ----------
+   A quiet centered doorway, not a hero. Sits above the footer. */
+.ll-more {
+  max-width: 720px; margin: 64px auto 0; padding: 80px 32px 48px;
+  text-align: center;
+  border-top: 1px solid color-mix(in oklab, var(--teal-900) 12%, transparent);
+}
+.ll-more__eyebrow { color: var(--teal-700); margin-bottom: 8px; font-size: 11px; }
+.ll-more__title { font: 500 22px/1.25 var(--font-display); letter-spacing: 0.02em; color: var(--teal-900); margin: 0 0 8px; }
+.ll-more__lead { color: var(--fg); font-size: 14px; max-width: 48ch; margin: 0 auto 20px; }
+.ll-more__actions { display: flex; justify-content: center; gap: 12px; }
+.ll-btn--primary { background: var(--teal-900); color: var(--paper); }
+.ll-btn--primary:hover { background: var(--teal-700); }
+[data-theme="dark"] .ll-more { border-top-color: rgba(255,255,255,0.08); }
+[data-theme="dark"] .ll-more__eyebrow { color: var(--brand); }
+[data-theme="dark"] .ll-more__title { color: var(--fg-strong); }
+[data-theme="dark"] .ll-more__lead { color: var(--fg); }
+[data-theme="dark"] .ll-btn--primary { background: var(--accent); color: var(--ink-900); }
+[data-theme="dark"] .ll-btn--primary:hover { background: var(--pink-200); }
+
+/* ---------- Past events — blander, secondary visual weight ---------- */
+.ll-section__head--sub { margin-top: 48px; margin-bottom: 8px; }
+.eyebrow--muted { color: var(--ink-500, #6b6f7a) !important; opacity: 0.85; }
+.ll-tag--neutral {
+  background: color-mix(in oklab, var(--ink-700) 8%, transparent);
+  color: var(--ink-700);
+  border: 1px solid color-mix(in oklab, var(--ink-700) 15%, transparent);
+}
+.ll-postlist--past .ll-postlist__item--past {
+  opacity: 0.62;
+  transition: opacity 200ms;
+}
+.ll-postlist--past .ll-postlist__item--past:hover { opacity: 1; }
+.ll-postlist--past .ll-postlist__title { color: var(--ink-700); font-weight: 500; }
+.ll-postlist--past .ll-postlist__summary { color: var(--ink-500, #6b6f7a); }
+[data-theme="dark"] .ll-tag--neutral {
+  background: rgba(255,255,255,0.06);
+  color: var(--fg-muted);
+  border-color: rgba(255,255,255,0.12);
+}
+[data-theme="dark"] .ll-postlist--past .ll-postlist__title { color: var(--fg-muted); }
+[data-theme="dark"] .ll-postlist--past .ll-postlist__summary { color: var(--fg-muted); }
+
+/* ---------- Contact (kept for FAQ/Contact page — not on home) ---------- */
+.ll-section--contact { background: transparent; padding: 0; max-width: none; }
+.ll-contact { position: relative; max-width: 980px; margin: 0 auto; padding: 80px 32px; overflow: hidden; }
+.ll-contact__branch {
+  position: absolute; bottom: -18%; left: -14%;
+  width: 46%; aspect-ratio: 2367/2505;
+  background: url(branch-anchor.png) no-repeat bottom left / contain;
+  opacity: 0.32; pointer-events: none;
+  -webkit-mask: none; mask: none;
+}
+.ll-contact__inner { position: relative; }
+.ll-contact__eyebrow { color: var(--teal-700); }
+.ll-contact__title { font: 600 38px/1.15 var(--font-display); letter-spacing: 0.04em; color: var(--teal-900); margin: 6px 0 14px; }
+.ll-contact__lead { color: var(--fg); font-size: 17px; max-width: 56ch; margin: 0 0 36px; }
+.ll-contact__grid { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start; }
+.ll-contact__form { display: grid; gap: 12px; }
+.ll-contact__form label { display: grid; gap: 6px; font: 500 11px/1 var(--font-ui); letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-700); }
+.ll-contact__form input, .ll-contact__form textarea { font: 400 14px/1.4 var(--font-body); padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(5,104,109,0.30); background: var(--paper); color: var(--fg-strong); outline: none; box-shadow: 0 1px 2px rgba(15,23,42,0.04); transition: border-color 180ms, box-shadow 180ms; }
+.ll-contact__form input:focus, .ll-contact__form textarea:focus { border-color: var(--teal-700); box-shadow: 0 0 0 3px rgba(5,104,109,0.18); }
+
+/* ---------- Buttons ---------- */
+.ll-btn { font: 600 14px var(--font-ui); letter-spacing: 0.06em; padding: 12px 22px; border-radius: 8px; border: 1px solid transparent; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 200ms; }
+.ll-btn--accent { background: var(--pink-600); color: var(--paper); justify-self: start; }
+.ll-btn--accent:hover { background: var(--pink-700); }
+.ll-btn--accent.is-sent { background: var(--success); }
+
+/* ---------- Footer ---------- */
+.ll-footer {
+  padding: 48px 32px 40px;
+  text-align: center;
+  color: var(--fg-muted);
+  font-size: 13px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.tl-footer__mark {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  opacity: 0.6;
+  transition: opacity 200ms;
+}
+.tl-footer__mark:hover { opacity: 1; }
+.tl-footer__copy { margin: 0; font-family: var(--font-mono); letter-spacing: 0.04em; font-size: 12px; }
+.ll-contact__grid--form-only { grid-template-columns: 1fr; max-width: 560px; }
+
+/* ---------- Single post reader ---------- */
+.ll-post { max-width: 720px; margin: 0 auto; padding: 56px 32px 80px; }
+.ll-post__back { background: transparent; border: 0; color: var(--teal-700); font: 500 12px var(--font-ui); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; padding: 0; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 8px; }
+.ll-post__back:hover { color: var(--pink-600); }
+.ll-post__head { display: flex; gap: 14px; align-items: center; margin-bottom: 14px; }
+.ll-post__date { font-size: 13px; color: var(--fg-muted); }
+.ll-post__title { font: 600 44px/1.15 var(--font-display); letter-spacing: 0.03em; color: var(--teal-900); margin: 0 0 18px; }
+.ll-post__lede { font: 400 20px/1.5 var(--font-body); color: var(--fg); margin: 0 0 28px; }
+.ll-post__figure { margin: 28px 0; }
+.ll-post__placeholder { display: grid; place-items: center; gap: 8px; aspect-ratio: 16/9; background: var(--teal-100); border: 1px dashed var(--teal-400); border-radius: 12px; color: var(--teal-900); }
+.ll-post__placeholder i { font-size: 32px; }
+.ll-post__placeholder span { font: 500 12px var(--font-ui); letter-spacing: 0.18em; text-transform: uppercase; }
+.ll-post__figure figcaption { font-size: 13px; color: var(--fg-muted); margin-top: 8px; text-align: center; }
+.ll-post h2 { font: 600 26px var(--font-display); color: var(--fg-strong); margin: 36px 0 12px; }
+.ll-post p { margin: 0 0 16px; }
+.ll-post blockquote { margin: 24px 0; padding: 18px 22px; background: var(--teal-50); border-radius: 12px; color: var(--teal-900); font-size: 17px; line-height: 1.55; }
+.ll-post ul { padding-left: 20px; }
+.ll-post__share { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--divider); display: flex; align-items: center; gap: 12px; }
+.ll-post__share span { font: 500 11px var(--font-ui); letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-muted); margin-right: 6px; }
+.ll-post__share a { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--paper-3); color: var(--teal-700); border: 0; }
+.ll-post__share a:hover { background: var(--pink-600); color: var(--paper); border: 0; }
+
+/* Mobile (<980px): sidebar collapses to a top hero. Avatar centered, nav hidden
+   (top header takes over). On very small screens, shrink avatar + tighten pad. */
+@media (max-width: 979px) {
+  .ll-sidebar { padding: 88px 32px 36px; }  /* clear fixed header */
+  .ll-sidebar::after { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 3px;
+    background: linear-gradient(90deg, var(--pink-600) 0%, var(--pink-400) 60%, var(--teal-400) 100%); }
+  .ll-sidebar__inner { align-items: flex-start; }
+  .ll-sidebar__nav { display: none; }  /* on mobile, top Header takes over */
+  .ll-sidebar__foot { display: none; }
+}
+@media (max-width: 720px) {
+  .ll-sidebar__avatar { width: 132px; height: 132px; }
+  .ll-contact__grid { grid-template-columns: 1fr; }
+  /* Keep the header nav visible — just tighten so 3 links + theme toggle
+     fit on narrow phones. */
+  .ll-header { padding: 0 16px; }
+  .ll-header__nav { gap: 2px; }
+  .ll-header__link {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    padding: 10px 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .ll-header { padding: 0 10px; }
+  .ll-header__link { padding: 10px 6px; font-size: 11px; }
+}
+
+/* =============================================================
+   DARK MODE — [data-theme="dark"]
+   ---------------------------------------------------------
+   site.css was authored with raw palette tokens (--paper, --teal-900)
+   instead of semantic ones, so dark mode doesn't kick in automatically
+   from colors_and_type.css. This block re-points the surfaces, type,
+   and accent treatments to the dark-mode equivalents. Structure and
+   layout are untouched — only colours flip.
+   ============================================================= */
+[data-theme="dark"] body {
+  background: var(--bg);                /* J · indigo kiss */
+  color: var(--fg);                     /* paper-tinted off-white */
+}
+
+/* ----- header: translucent dark over the indigo-kiss page ----- */
+[data-theme="dark"] .ll-header {
+  background: rgba(8, 9, 12, 0.40);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+[data-theme="dark"] .tl-footer__mark { filter: brightness(1.4); }
+
+[data-theme="dark"] .ll-header__link { color: var(--fg-muted); }
+[data-theme="dark"] .ll-header__link:hover,
+[data-theme="dark"] .ll-header__link.is-active { color: var(--fg-strong); }
+[data-theme="dark"] .ll-header__link.is-active::after { background: var(--brand); }
+
+/* ----- hero: stays the dark hero (G · indigo breathing).
+   Light hero is teal-900 → indigo-700; dark hero is the indigo
+   breathing gradient so the hero distinguishes from --bg below it. */
+[data-theme="dark"] .ll-hero {
+  background: var(--bg-hero);
+  color: var(--fg);
+}
+[data-theme="dark"] .ll-hero__interests li {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.14);
+  color: var(--fg);
+}
+[data-theme="dark"] .ll-hero__socials a {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.14);
+  color: var(--fg);
+}
+[data-theme="dark"] .ll-hero__socials a:hover {
+  background: var(--accent);            /* pink-300 in dark */
+  border-color: var(--accent);
+  color: var(--ink-900);
+}
+
+/* ----- sections ----- */
+/* alt-section is intentionally transparent in both modes — the page kiss is the
+   environment; section hierarchy comes from type, spacing, and card elevation,
+   not a new ground. --bg-feature is reserved for whole feature pages.       */
+[data-theme="dark"] .eyebrow { color: var(--brand); }    /* teal-400 in dark */
+
+/* tags read as soft hue chips on dark */
+[data-theme="dark"] .ll-tag--teal { background: rgba(79,181,181,.18); color: var(--teal-200); }
+[data-theme="dark"] .ll-tag--pink { background: rgba(218,148,188,.18); color: var(--pink-200); }
+
+/* ----- post list cards: alpha-veil elevation over the kiss.
+   The card lightens the patch of kiss by a constant amount so contrast
+   stays consistent regardless of where the card sits in the gradient.   */
+[data-theme="dark"] .ll-postlist__item {
+  background: var(--surface-card);
+  border-color: var(--surface-card-border);
+}
+[data-theme="dark"] .ll-postlist__item:hover {
+  background: rgba(255,255,255,0.075);
+  box-shadow: 0 2px 4px rgba(0,0,0,.30), 0 20px 48px rgba(0,0,0,.55);
+  transform: translateY(-1px);
+}
+[data-theme="dark"] .ll-postlist__date { color: var(--fg-muted); }
+[data-theme="dark"] .ll-postlist__title { color: var(--fg-strong); }  /* pink-200 */
+[data-theme="dark"] .ll-postlist__summary { color: var(--fg); }
+
+/* ----- contact: page kiss carries through. Type re-tinted for dark.
+   The anchor branch motif remains — already visible against the dark kiss. */
+[data-theme="dark"] .ll-section--contact { background: transparent; }
+[data-theme="dark"] .ll-contact__eyebrow { color: var(--brand); }
+[data-theme="dark"] .ll-contact__title { color: var(--fg-strong); }   /* pink-200 */
+[data-theme="dark"] .ll-contact__lead { color: var(--fg); }
+[data-theme="dark"] .ll-contact__branch { opacity: 0.42; }
+[data-theme="dark"] .ll-contact__form label { color: var(--teal-200); }
+[data-theme="dark"] .ll-contact__form input,
+[data-theme="dark"] .ll-contact__form textarea {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.16);
+  color: var(--fg-strong);
+}
+[data-theme="dark"] .ll-contact__form input:focus,
+[data-theme="dark"] .ll-contact__form textarea:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(79,181,181,0.22);
+}
+
+/* ----- footer: match the body so it doesn't punch out ----- */
+[data-theme="dark"] .ll-footer {
+  background: transparent;
+  color: var(--fg-muted);
+}
+
+/* ----- post reader ----- */
+[data-theme="dark"] .ll-post__back { color: var(--brand); }
+[data-theme="dark"] .ll-post__back:hover { color: var(--accent); }
+[data-theme="dark"] .ll-post__date { color: var(--fg-muted); }
+[data-theme="dark"] .ll-post__title { color: var(--fg-strong); }    /* pink-200 */
+[data-theme="dark"] .ll-post__lede { color: var(--fg); }
+[data-theme="dark"] .ll-post h2 { color: var(--fg-strong); }
+[data-theme="dark"] .ll-post__placeholder {
+  background: rgba(79,181,181,.10);
+  border-color: rgba(79,181,181,.30);
+  color: var(--teal-200);
+}
+[data-theme="dark"] .ll-post blockquote {
+  background: var(--bg-muted);
+  color: var(--fg);
+  border-left: 3px solid var(--brand);
+}
+[data-theme="dark"] .ll-post__share a {
+  background: var(--bg-muted);
+  color: var(--brand);
+}
+[data-theme="dark"] .ll-post__share a:hover {
+  background: var(--accent);
+  color: var(--ink-900);
+}

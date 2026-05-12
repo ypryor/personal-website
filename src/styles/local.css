@@ -1,0 +1,367 @@
+/* tinalasisi.com — MVP-only additions on top of the lab UI kit */
+
+/* avatar placeholder (kept for reference, not currently used) */
+.tl-avatar-placeholder {
+  width: 168px; height: 168px;
+  border-radius: 50%;
+  border: 4px solid var(--paper);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 22px;
+  display: grid; place-items: center;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02)),
+    radial-gradient(circle at 30% 30%, var(--pink-400) 0%, var(--pink-700) 55%, var(--indigo-700) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.tl-avatar-placeholder::before {
+  content: ""; position: absolute; inset: 0;
+  background: url(branch-anchor.png) no-repeat center / 130% auto;
+  opacity: 0.18;
+  mix-blend-mode: screen;
+}
+.tl-avatar-placeholder span {
+  position: relative;
+  font-family: var(--font-wordmark);
+  font-weight: 500;
+  font-size: 38px;
+  letter-spacing: 0.18em;
+  color: var(--paper);
+}
+
+/* sidebar email — plain text, no mailto */
+.ll-sidebar__email {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: inline-block;
+  margin: 0 0 20px;
+  user-select: all;
+}
+
+/* main content shell */
+.tl-main {
+  max-width: 760px;
+  margin: 0 auto;
+  /* top padding clears the 64px fixed header */
+  padding: clamp(88px, 9vw, 112px) clamp(20px, 5vw, 56px) clamp(56px, 8vw, 96px);
+}
+
+.tl-about__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 4vw, 38px);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--fg-strong);
+  margin: 8px 0 22px;
+  max-width: 22ch;
+}
+.tl-about__body {
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.8vw, 19px);
+  line-height: 1.7;
+  color: var(--fg);
+  max-width: 56ch;
+  margin: 0 0 28px;
+}
+.tl-about__body a { color: var(--link); border-bottom: 1px solid currentColor; }
+.tl-about__body a:hover { color: var(--link-hover); }
+
+.tl-cta-row {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  margin-top: 20px;
+}
+.tl-btn-ghost {
+  background: transparent;
+  color: var(--fg-strong);
+  border: 1px solid var(--border-strong);
+}
+.tl-btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* affiliations — quiet bulleted list, not loud cards */
+.tl-affil {
+  margin-top: 32px;
+  padding-top: 0;
+  border-top: 0;
+}
+.tl-affil[hidden] { display: none; }
+
+/* sidebar variant — centered */
+.ll-sidebar__inner--right { text-align: center; align-items: center; }
+.ll-sidebar__inner--right .ll-sidebar__avatar { margin-left: auto; margin-right: auto; }
+
+/* icon-only social row, right-justified */
+.tl-sb-icons {
+  display: flex; gap: 16px; justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-top: 24px; padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+.tl-sb-icons a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  color: rgba(255,255,255,0.78);
+  border: 0;
+  transition: color 180ms, transform 180ms;
+}
+.tl-sb-icons a:hover { color: var(--pink-300); transform: translateY(-1px); }
+.tl-sb-icons i { font-size: 22px; }
+
+.tl-sb-affil--compact .tl-sb-affil__list { gap: 14px; }
+.tl-sb-affil--compact .tl-sb-affil__list li { line-height: 1.35; gap: 2px; }
+.tl-sb-affil--compact .tl-sb-affil__list a { font-size: 17px; font-weight: 500; }
+.tl-sb-affil--compact .tl-sb-affil__list span { font-size: 14px; color: rgba(255,255,255,0.55); display: block; }
+
+/* center in centered variant */
+.ll-sidebar__inner--right .tl-sb-affil { text-align: center; }
+.ll-sidebar__inner--right .tl-sb-affil__list { text-align: center; }
+.ll-sidebar__inner--right .tl-sb-affil__list li { justify-items: center; }
+.ll-sidebar__inner--right .tl-sb-affil__list a { margin-left: auto; margin-right: auto; }
+.ll-sidebar__inner--right .tl-sb-affil__list span { text-align: center; }
+.ll-sidebar__inner--right .tl-sb-email { margin-left: auto; margin-right: auto; }
+.ll-sidebar__inner--right .tl-sb-icons { justify-content: center; }
+.tl-affil__list {
+  list-style: none; padding: 0; margin: 16px 0 0;
+  display: grid; gap: 18px 32px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 720px) {
+  .tl-affil__list { grid-template-columns: 1fr; }
+}
+.tl-affil__list li {
+  font-size: 15px;
+  line-height: 1.4;
+  display: grid;
+  gap: 2px;
+}
+.tl-affil__list a {
+  color: var(--fg-strong);
+  font-weight: 500;
+  border: none;
+  border-bottom: 1px solid transparent;
+}
+.tl-affil__list a:hover {
+  color: var(--accent);
+  border-bottom-color: currentColor;
+}
+.tl-affil__sub {
+  font-size: 12px;
+  color: var(--fg-muted);
+  letter-spacing: 0.04em;
+}
+
+/* phase-1 placeholder card */
+.tl-future {
+  margin-top: 72px;
+  padding: 22px 24px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 14px;
+  background: var(--surface-card);
+  backdrop-filter: var(--surface-card-blur);
+}
+.tl-future__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin: 0 0 6px;
+}
+.tl-future__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--fg-strong);
+  font-size: 15px;
+  margin: 0 0 12px;
+}
+.tl-future__list {
+  margin: 0; padding: 0; list-style: none;
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.tl-future__list li {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--fg-muted);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.04);
+  border: 1px solid var(--divider);
+}
+[data-theme="dark"] .tl-future__list li {
+  background: rgba(255,255,255,0.04);
+}
+
+/* theme toggle in header */
+.tl-theme-toggle {
+  width: 36px; height: 36px;
+  border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface-card);
+  border: 1px solid var(--surface-card-border);
+  backdrop-filter: var(--surface-card-blur);
+  cursor: pointer;
+  color: var(--fg);
+  transition: transform var(--duration-base), color var(--duration-base);
+  margin-left: 6px;
+}
+.tl-theme-toggle:hover { transform: rotate(18deg); color: var(--accent); }
+.tl-theme-toggle svg { width: 16px; height: 16px; }
+/* Show exactly one icon, picked by the user's preference (system/light/dark).
+   `data-theme-pref` is set by the bootstrap script in Base.astro. */
+.tl-theme-toggle .icon-system,
+.tl-theme-toggle .icon-sun,
+.tl-theme-toggle .icon-moon { display: none; }
+[data-theme-pref="system"] .tl-theme-toggle .icon-system { display: block; }
+[data-theme-pref="light"] .tl-theme-toggle .icon-sun { display: block; }
+[data-theme-pref="dark"] .tl-theme-toggle .icon-moon { display: block; }
+/* Fallback when JS hasn't run yet (no data-theme-pref attribute): show the
+   system icon so the button isn't empty. */
+:root:not([data-theme-pref]) .tl-theme-toggle .icon-system { display: block; }
+
+/* desktop: header is hidden by .ll-header rule but we still want the theme toggle
+   to be reachable. Add a desktop-only toggle docked top-right of content column. */
+@media (min-width: 980px) {
+  .ll-content { position: relative; }
+  .ll-content::after {
+    /* gradient ribbon below the kiss — already provided by site.css; nothing to do here */
+  }
+}
+
+/* events placeholder */
+.tl-events {
+  margin-top: 72px;
+  padding-top: 40px;
+  border-top: 1px solid var(--divider);
+}
+.tl-events__note {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--fg-muted);
+  margin: 0 0 28px;
+  font-style: italic;
+}
+.tl-events__subhead { margin-top: 28px; margin-bottom: 14px; }
+
+/* socials: FA + academicons icons, normal-size */
+.ll-sidebar__socials a i { font-size: 14px; }
+
+/* event card links — make the whole card a hover target */
+.ll-postlist__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 120ms ease;
+}
+.ll-postlist__link:hover .ll-postlist__title,
+.ll-postlist__link:focus-visible .ll-postlist__title {
+  color: var(--pink-700);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.ll-postlist__link:focus-visible {
+  outline: 2px solid var(--pink-500);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* contact section: clear separation from events */
+.tl-contact {
+  margin-top: 72px;
+  padding-top: 40px;
+  border-top: 1px solid var(--divider);
+  scroll-margin-top: 80px;        /* anchor scroll lands below the fixed header */
+}
+.tl-contact__title {
+  font: 600 28px/1.15 var(--font-display); letter-spacing: 0.03em;
+  color: var(--fg-strong); margin: 8px 0 14px;
+}
+.tl-contact__lead {
+  font-size: 16px; line-height: 1.6; color: var(--fg);
+  max-width: 48ch; margin: 0 0 24px;
+}
+
+/* events + about scroll margins so anchor links don't land behind the header */
+.tl-about { scroll-margin-top: 80px; }
+.tl-events { scroll-margin-top: 80px; }
+
+/* contact-page note under CTA */
+.tl-contact-note {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--fg-muted);
+  font-style: italic;
+}
+
+/* ============================================================
+   Sidebar — affiliations + elsewhere (in-sidebar versions)
+   ============================================================ */
+.tl-sb-heading {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin: 0 0 10px;
+}
+.tl-sb-affil { margin: 24px 0 0; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.10); }
+.tl-sb-affil__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.tl-sb-email {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: rgba(255,255,255,0.92);
+  margin: 0;
+  letter-spacing: 0.01em;
+  user-select: all;
+}
+.tl-sb-affil__list li { display: grid; gap: 1px; line-height: 1.35; }
+.tl-sb-affil__list a {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.92);
+  border: 0;
+  border-bottom: 1px solid transparent;
+  width: max-content;
+  max-width: 100%;
+}
+.tl-sb-affil__list a:hover { color: var(--pink-300); border-bottom-color: rgba(218,148,188,0.45); }
+.tl-sb-affil__list span {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.005em;
+}
+
+.tl-sb-links { margin: 24px 0 0; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.10); }
+.tl-sb-links__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.tl-sb-links__list a {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 7px 4px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  border: 0;
+  letter-spacing: 0.01em;
+  transition: color 180ms, transform 180ms;
+}
+.tl-sb-links__list a:hover { color: var(--pink-300); transform: translateX(2px); }
+.tl-sb-links__list i {
+  font-size: 14px;
+  width: 18px;
+  text-align: center;
+  color: rgba(255,255,255,0.70);
+  transition: color 180ms;
+}
+.tl-sb-links__list a:hover i { color: var(--pink-300); }

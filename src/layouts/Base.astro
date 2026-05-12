@@ -1,0 +1,67 @@
+---
+// Base layout — provides the <html> shell, font CDN links, theme bootstrap,
+// and the sidebar + content shell. Pages render their content into <slot />.
+export interface Props {
+  title?: string;
+}
+const { title = 'Tina Lasisi' } = Astro.props;
+
+import '../styles/tokens.css';
+import '../styles/site.css';
+import '../styles/local.css';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{title}</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+  />
+  <script is:inline>
+    // Theme bootstrap — runs before paint to avoid FOUC.
+    // Three states: "system" (follow OS), "light", "dark".
+    // `data-theme-pref` holds the user's choice (drives the toggle icon).
+    // `data-theme` holds the *resolved* value ("light" | "dark") so all
+    // existing CSS keeps working unchanged.
+    (function () {
+      const VALID = ['system', 'light', 'dark'];
+      const urlParam = new URLSearchParams(location.search).get('theme');
+      let pref = VALID.includes(urlParam) ? urlParam : localStorage.getItem('tl-theme');
+      if (!VALID.includes(pref)) pref = 'system';
+
+      const mql = window.matchMedia('(prefers-color-scheme: dark)');
+      const resolve = (p) => (p === 'system' ? (mql.matches ? 'dark' : 'light') : p);
+
+      const apply = (p) => {
+        document.documentElement.setAttribute('data-theme-pref', p);
+        document.documentElement.setAttribute('data-theme', resolve(p));
+        localStorage.setItem('tl-theme', p);
+      };
+      apply(pref);
+
+      // If the user is on "system", re-resolve whenever the OS flips.
+      mql.addEventListener('change', () => {
+        if (document.documentElement.getAttribute('data-theme-pref') === 'system') {
+          document.documentElement.setAttribute('data-theme', mql.matches ? 'dark' : 'light');
+        }
+      });
+
+      // Cycle: system → light → dark → system
+      window.cycleTheme = function () {
+        const cur = document.documentElement.getAttribute('data-theme-pref') || 'system';
+        const order = ['system', 'light', 'dark'];
+        apply(order[(order.indexOf(cur) + 1) % order.length]);
+      };
+    })();
+  </script>
+</head>
+<body>
+  <slot /></body>
+</html>

@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import Sidebar from '../components/Sidebar.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { affiliations } from '../data/affiliations';
+import { upcoming, recent } from '../data/events';
+---
+<Base title="Tina Lasisi">
+  <div class="ll-layout" data-screen-label="Home">
+    <Sidebar />
+
+    <div class="ll-content">
+      <SiteHeader />
+
+      <main class="tl-main">
+
+        <section class="tl-about">
+          <p class="eyebrow">About</p>
+          <p class="tl-about__body">
+            I'm a biological anthropologist interested in the evolution and
+            genetics of human variation with a focus on pigmentation and hair.
+            You can learn more about the work my lab does
+            <a href="https://www.lasisilab.com/" target="_blank" rel="noopener">here</a>.
+          </p>
+
+          <section class="tl-affil" id="affiliations" aria-label="Affiliations">
+            <p class="eyebrow tl-events__subhead">Affiliations</p>
+            <ul class="tl-affil__list">
+              {affiliations.map((a) => (
+                <li>
+                  <a href={a.href} target="_blank" rel="noopener">{a.name}</a>
+                  <span class="tl-affil__sub">{a.sub}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <div class="tl-cta-row">
+            <a class="ll-btn ll-btn--primary" href="https://drive.google.com/file/d/14-MeUAdcJ8gipCyfVouDqzo90WixavXB/view?usp=sharing" target="_blank" rel="noopener">
+              Download CV
+            </a>
+            <a class="ll-btn tl-btn-ghost" href="https://www.lasisilab.com" target="_blank" rel="noopener">
+              Visit lab website →
+            </a>
+          </div>
+        </section>
+
+        <section class="tl-events" id="events" aria-label="Events">
+          <p class="eyebrow">Events</p>
+
+          <p class="eyebrow tl-events__subhead">Upcoming</p>
+          <ul class="ll-postlist">
+            {upcoming.map((e) => (
+              <li class="ll-postlist__item">
+                <a class="ll-postlist__link" href={e.href} target="_blank" rel="noopener">
+                  <div class="ll-postlist__meta">
+                    <span class={`ll-tag ll-tag--${e.tagColor}`}>{e.tag}</span>
+                    <span class="ll-postlist__date" set:html={e.date}></span>
+                  </div>
+                  <h3 class="ll-postlist__title" set:html={e.title}></h3>
+                  <p class="ll-postlist__summary">{e.summary}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <p class="eyebrow eyebrow--muted tl-events__subhead">Recent</p>
+          <ul class="ll-postlist ll-postlist--past">
+            {recent.map((e) => (
+              <li class="ll-postlist__item ll-postlist__item--past">
+                <a class="ll-postlist__link" href={e.href} target="_blank" rel="noopener">
+                  <div class="ll-postlist__meta">
+                    <span class={`ll-tag ll-tag--${e.tagColor}`}>{e.tag}</span>
+                    <span class="ll-postlist__date" set:html={e.date}></span>
+                  </div>
+                  <h3 class="ll-postlist__title" set:html={e.title}></h3>
+                  <p class="ll-postlist__summary">{e.summary}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="tl-contact" id="contact" aria-label="Contact">
+          <p class="eyebrow">Get in touch</p>
+          <h2 class="tl-contact__title">Contact</h2>
+          <p class="tl-contact__lead">Here's a form if you want to reach out for something.</p>
+
+          <a class="ll-btn ll-btn--accent" href="https://forms.gle/UqPArEK7kq8UX3Pe8" target="_blank" rel="noopener">
+            Open the contact form →
+          </a>
+          <p class="tl-contact-note">Opens in a new tab · Google Form</p>
+        </section>
+
+      </main>
+
+      <footer class="ll-footer">
+        <img src="/mark-teal.png" alt="" class="tl-footer__mark" />
+        <p class="tl-footer__copy">© 2026 Lasisi Labs LLC</p>
+      </footer>
+    </div>
+  </div>
+</Base>
