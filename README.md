@@ -164,23 +164,3 @@ territory:
 
 ---
 
-## Migration from `lasisi_blogdown`
-
-```bash
-# in your existing repo
-git checkout -b astro-rebuild
-mkdir _archive_blogdown
-git mv content config themes data assets static \
-       config.toml netlify.toml index.Rmd tina_site_new.Rproj \
-       _archive_blogdown/
-
-# drop this scaffold in at the root
-cp -R astro-handoff/. .
-git add -A
-git commit -m "Replace Hugo blogdown with Astro scaffold"
-npm install
-npm run dev
-```
-
-When you're happy, delete `_archive_blogdown/` (git history still has it) and
-merge to `main`.
