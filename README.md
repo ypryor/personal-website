@@ -1,9 +1,5 @@
 # Tina Lasisi — personal site (Astro)
 
-Astro scaffold of the personal site we built in Claude Design. Drop this into
-your `lasisi_blogdown` repo (on a fresh branch) and you have a working dev
-server in two commands.
-
 ---
 
 ## What's in the box
