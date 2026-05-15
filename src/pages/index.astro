@@ -5,7 +5,7 @@ import SiteHeader from '../components/SiteHeader.astro';
 import { affiliations } from '../data/affiliations';
 import { upcoming, recent } from '../data/events';
 ---
-<Base title="Tina Lasisi">
+<Base title="Yemko Pryor">
   <div class="ll-layout" data-screen-label="Home">
     <Sidebar />
 
@@ -17,26 +17,33 @@ import { upcoming, recent } from '../data/events';
         <section class="tl-about">
           <p class="eyebrow">About</p>
           <p class="tl-about__body">
-            I'm a biological anthropologist interested in the evolution and
-            genetics of human variation with a focus on pigmentation and hair.
-            You can learn more about the work my lab does
-            <a href="https://www.lasisilab.com/" target="_blank" rel="noopener">here</a>.
+            I'm a biological anthropologist and postdoctoral researcher in the
+            <a href="https://www.lasisilab.com/" target="_blank" rel="noopener">Lasisi Lab</a>
+            at the University of Michigan. My research examines how evolutionary
+            forces have shaped human genomic diversity, with a focus on
+            populations of African descent. I combine ancient DNA, historical
+            genomics, and population genetic methods to understand patterns of
+            natural selection and the interplay between genetic and epigenetic
+            variation across generations.
           </p>
 
-          <section class="tl-affil" id="affiliations" aria-label="Affiliations">
-            <p class="eyebrow tl-events__subhead">Affiliations</p>
-            <ul class="tl-affil__list">
-              {affiliations.map((a) => (
-                <li>
-                  <a href={a.href} target="_blank" rel="noopener">{a.name}</a>
-                  <span class="tl-affil__sub">{a.sub}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
+          {affiliations.length > 0 && (
+            <section class="tl-affil" id="affiliations" aria-label="Affiliations">
+              <p class="eyebrow tl-events__subhead">Affiliations</p>
+              <ul class="tl-affil__list">
+                {affiliations.map((a) => (
+                  <li>
+                    <a href={a.href} target="_blank" rel="noopener">{a.name}</a>
+                    <span class="tl-affil__sub">{a.sub}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           <div class="tl-cta-row">
-            <a class="ll-btn ll-btn--primary" href="https://drive.google.com/file/d/14-MeUAdcJ8gipCyfVouDqzo90WixavXB/view?usp=sharing" target="_blank" rel="noopener">
+            <!-- TODO: Replace the href below with a link to your CV (e.g. a Google Drive share link) -->
+            <a class="ll-btn ll-btn--primary" href="#" target="_blank" rel="noopener">
               Download CV
             </a>
             <a class="ll-btn tl-btn-ghost" href="https://www.lasisilab.com" target="_blank" rel="noopener">
@@ -49,54 +56,62 @@ import { upcoming, recent } from '../data/events';
           <p class="eyebrow">Events</p>
 
           <p class="eyebrow tl-events__subhead">Upcoming</p>
-          <ul class="ll-postlist">
-            {upcoming.map((e) => (
-              <li class="ll-postlist__item">
-                <a class="ll-postlist__link" href={e.href} target="_blank" rel="noopener">
-                  <div class="ll-postlist__meta">
-                    <span class={`ll-tag ll-tag--${e.tagColor}`}>{e.tag}</span>
-                    <span class="ll-postlist__date" set:html={e.date}></span>
-                  </div>
-                  <h3 class="ll-postlist__title" set:html={e.title}></h3>
-                  <p class="ll-postlist__summary">{e.summary}</p>
-                </a>
-              </li>
-            ))}
-          </ul>
+          {upcoming.length > 0 ? (
+            <ul class="ll-postlist">
+              {upcoming.map((e) => (
+                <li class="ll-postlist__item">
+                  <a class="ll-postlist__link" href={e.href} target="_blank" rel="noopener">
+                    <div class="ll-postlist__meta">
+                      <span class={`ll-tag ll-tag--${e.tagColor}`}>{e.tag}</span>
+                      <span class="ll-postlist__date" set:html={e.date}></span>
+                    </div>
+                    <h3 class="ll-postlist__title" set:html={e.title}></h3>
+                    <p class="ll-postlist__summary">{e.summary}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="tl-about__body" style="color: var(--fg-muted);">Nothing scheduled yet — check back soon.</p>
+          )}
 
-          <p class="eyebrow eyebrow--muted tl-events__subhead">Recent</p>
-          <ul class="ll-postlist ll-postlist--past">
-            {recent.map((e) => (
-              <li class="ll-postlist__item ll-postlist__item--past">
-                <a class="ll-postlist__link" href={e.href} target="_blank" rel="noopener">
-                  <div class="ll-postlist__meta">
-                    <span class={`ll-tag ll-tag--${e.tagColor}`}>{e.tag}</span>
-                    <span class="ll-postlist__date" set:html={e.date}></span>
-                  </div>
-                  <h3 class="ll-postlist__title" set:html={e.title}></h3>
-                  <p class="ll-postlist__summary">{e.summary}</p>
-                </a>
-              </li>
-            ))}
-          </ul>
+          {recent.length > 0 && (
+            <>
+              <p class="eyebrow eyebrow--muted tl-events__subhead">Recent</p>
+              <ul class="ll-postlist ll-postlist--past">
+                {recent.map((e) => (
+                  <li class="ll-postlist__item ll-postlist__item--past">
+                    <a class="ll-postlist__link" href={e.href} target="_blank" rel="noopener">
+                      <div class="ll-postlist__meta">
+                        <span class={`ll-tag ll-tag--${e.tagColor}`}>{e.tag}</span>
+                        <span class="ll-postlist__date" set:html={e.date}></span>
+                      </div>
+                      <h3 class="ll-postlist__title" set:html={e.title}></h3>
+                      <p class="ll-postlist__summary">{e.summary}</p>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </section>
 
         <section class="tl-contact" id="contact" aria-label="Contact">
           <p class="eyebrow">Get in touch</p>
           <h2 class="tl-contact__title">Contact</h2>
-          <p class="tl-contact__lead">Here's a form if you want to reach out for something.</p>
+          <p class="tl-contact__lead">Feel free to reach out — I'm always happy to connect.</p>
 
-          <a class="ll-btn ll-btn--accent" href="https://forms.gle/UqPArEK7kq8UX3Pe8" target="_blank" rel="noopener">
-            Open the contact form →
+          <!-- TODO: Replace href with your own contact form URL, or remove this button and just list your email -->
+          <a class="ll-btn ll-btn--accent" href="mailto:ypryor@umich.edu">
+            Send me an email →
           </a>
-          <p class="tl-contact-note">Opens in a new tab · Google Form</p>
         </section>
 
       </main>
 
       <footer class="ll-footer">
         <img src="/mark-teal.png" alt="" class="tl-footer__mark" />
-        <p class="tl-footer__copy">© 2026 Lasisi Labs LLC</p>
+        <p class="tl-footer__copy">© 2026 Yemko Pryor</p>
       </footer>
     </div>
   </div>
