@@ -34,7 +34,10 @@ const links = Object.entries(profile.links).filter(([, url]) => url);
   <body>
     <header class="site-header">
       <div class="wrap">
-        <a class="brand" href={href('/')}>Yemko Pryor<span>.</span></a>
+        <a class="brand" href={href('/')}>
+          <img src={href('/logo.svg')} alt="" width="36" height="36" />
+          <b>Yemko Pryor, PhD<span>.</span></b>
+        </a>
         <nav class="nav" aria-label="Main">
           {
             nav.map((n) => (

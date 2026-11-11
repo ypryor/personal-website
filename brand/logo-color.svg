@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -18 128 144" width="2560" height="2880">
+
+  <!-- open book: cover, page stack, top pages, lines of text -->
+  <path d="M4 76 58 90q2-2 4 0l54-14v30L62 119q-2-2-4 0L4 106z" fill="#3b1f2b"/>
+  <g fill="#f5f1e8" stroke="#3b1f2b" stroke-width="2.5" stroke-linejoin="round">
+    <path d="M60 90C49 79 28 74 9 77v27c19-3 40 2 51 12z"/>
+    <path d="M60 90c11-11 32-16 51-13v27c-19-3-40 2-51 12z"/>
+    <path d="M60 84C49 73 28 68 9 71v27c19-3 40 2 51 12z"/>
+    <path d="M60 84c11-11 32-16 51-13v27c-19-3-40 2-51 12z"/>
+  </g>
+  <g fill="none" stroke="#3b1f2b" stroke-width="1.8" stroke-linecap="round">
+    <path d="M16 78c10-1 21 1 31 7M16 85c10-1 21 1 31 7M16 92c10-1 21 1 31 7"/>
+    <path d="M104 78c-10-1-21 1-31 7M104 85c-10-1-21 1-31 7M104 92c-10-1-21 1-31 7"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- helix: rungs, then two strands that pass over and under each other -->
+    <g stroke="#3b1f2b" stroke-width="2.6">
+      <path d="M52 33h16M50 37h20M54 41h12M52 49h16M50 53h20M54 57h12M52 65h16M50 69h20M55 73.500h10"/>
+    </g>
+    <path d="M73 20C73 28 47 28 47 36 47 44 73 44 73 52 73 60 47 60 47 68 47 76 60 78 60 86" stroke="#a23b72" stroke-width="4.5"/>
+    <path d="M47 20C47 28 73 28 73 36 73 44 47 44 47 52 47 60 73 60 73 68 73 76 60 78 60 86" stroke="#f18f01" stroke-width="4.5"/>
+    <clipPath id="x"><rect x="51" y="39" width="18" height="10"/></clipPath>
+    <path d="M47 36C47 44 73 44 73 52" stroke="#a23b72" stroke-width="4.5" clip-path="url(#x)"/>
+    <!-- phylogeny: each strand of the helix flows up into a curved branch that forks once -->
+    <path d="M47 20C47 12 45 4 46 -5M46.6 15.5C43 8 31 11 27 1" stroke="#f18f01" stroke-width="4.5"/>
+    <path d="M73 20C73 12 75 4 74 -5M73.4 15.5C77 8 89 11 93 1" stroke="#a23b72" stroke-width="4.5"/>
+  </g>
+  <!-- tips of the phylogeny -->
+  <circle cx="26.5" cy="0" r="5.5" fill="#f18f01"/><circle cx="46" cy="-6" r="5.5" fill="#f18f01"/>
+  <circle cx="74" cy="-6" r="5.5" fill="#a23b72"/><circle cx="93.5" cy="0" r="5.5" fill="#a23b72"/>
+</svg>

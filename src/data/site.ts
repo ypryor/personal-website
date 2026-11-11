@@ -13,7 +13,7 @@ export const profile = {
   location: 'Ann Arbor, MI',
   tagline: 'DNA is a historical document.',
   statement:
-    'I read DNA alongside the written historical record to study how moments in history — the transatlantic and eastern slave trades, and the laws and social systems built around them — changed the trajectory of admixture and human variation, and I build better methods for measuring those changes.',
+    'I am a genetic historian studying how migration, admixture, and social history shape human variation. By reading DNA alongside the written historical record, I use skin pigmentation—a highly variable and evolutionarily dynamic trait—as a model for understanding how populations change as they come together.',
   // Shown in the footer. Set to '' to hide.
   email: 'ypryor@umich.edu',
   links: {
@@ -28,24 +28,24 @@ export const profile = {
 export const scales = [
   {
     n: '01',
-    title: 'Historical',
-    kicker: 'Genomes ↔ archives',
+    title: 'Trait',
+    kicker: 'Pigmentation as a model',
     body:
-      'DNA is a historical document, and it says the most when read next to actual ones. I pair historical and modern genomes with legal codes and archival records to ask how specific moments in history redirected admixture and population variation.',
+      'Skin pigmentation is a dynamic, complex trait that I have studied for years. It varies more than almost any other human trait, so it captures the upper bounds of human variation and tracks how that variation moves in actively admixing populations.',
   },
   {
     n: '02',
     title: 'Population',
     kicker: 'Admixture through time',
     body:
-      'Societies shaped by the slave trades drew racial lines differently, from the one-drop rule in the United States to graded caste systems in the Caribbean and South America. I compare the genetic trajectories those systems produced, and extend population-history methods to handle highly admixed, recently diverged groups.',
+      'Most population-history methods were built for old, well-separated groups. I extend them to highly admixed, recently diverged populations, and ask how a gene’s place in the melanogenesis network and a population’s history together shape constraint and adaptation.',
   },
   {
     n: '03',
-    title: 'Biological',
-    kicker: 'Networks and plasticity',
+    title: 'Historical',
+    kicker: 'Genomes ↔ archives',
     body:
-      'A variant’s effect depends on its gene’s place in a network and on the history of the population carrying it. I use the melanogenesis pathway as a model for genetic constraint, and the epigenome as a readout of plasticity: how people respond biologically to changing environments.',
+      'DNA is a historical document, and it says the most when read next to actual ones. I pair historical and modern genomes with legal codes and archival records to ask how moments in history redirected admixture and variation.',
   },
 ];
 
@@ -105,7 +105,7 @@ export const publications: Publication[] = [
     venue: 'Journal of Investigative Dermatology 146, 1740–1751',
     status: 'Published',
     summary:
-      'Objective skin measurements are not automatically unbiased. Analysing 15,000+ reflectance spectra, we show that melanin progressively masks hemoglobin’s spectral signature, so visible-range erythema detection — by spectrophotometers, clinical cameras, or AI — loses sensitivity in the darkest skin, where data are also scarcest.',
+      'Objective skin measurements are not automatically unbiased. Analysing 15,000+ reflectance spectra, we show that melanin progressively masks hemoglobin’s spectral signature, so visible-range erythema detection, whether by spectrophotometers, clinical cameras, or AI, loses sensitivity in the darkest skin, where data are also scarcest.',
     links: [
       { label: 'Journal', href: 'https://doi.org/10.1016/j.jid.2026.03.025' },
       { label: 'bioRxiv', href: 'https://doi.org/10.64898/2025.12.22.696093' },

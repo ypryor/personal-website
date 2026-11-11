@@ -18,12 +18,21 @@ const band = [
   <section class="hero">
     <div class="wrap">
       <p class="eyebrow">
-        <b>●</b> {profile.role} · {profile.lab} · {profile.institution}
+        <b>●</b> Genetic Historian · {profile.role} · {profile.lab} · {profile.institution}
       </p>
-      <h1>Yemko<br /><em>Pryor</em></h1>
+      <div class="hero-top">
+        <h1>Yemko<br /><em>Pryor</em></h1>
+        <img
+          class="headshot"
+          src={`${base}/headshot.jpg`}
+          alt="Portrait of Yemko Pryor, smiling, with short purple hair, round glasses and DNA double-helix earrings"
+          width="800"
+          height="1000"
+        />
+      </div>
 
       <div class="hero-grid">
-        <p class="tagline">DNA is a <mark>historical document.</mark> I read it alongside the archive to trace how history shapes human variation.</p>
+        <p class="tagline">DNA is a <mark>historical document.</mark> I use pigmentation to understand how human variation changes through time.</p>
         <div>
           <p class="lede">{profile.statement}</p>
           <div class="btns">

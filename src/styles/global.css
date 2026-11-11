@@ -104,6 +104,18 @@ p {
   letter-spacing: -0.02em;
   text-decoration: none;
 }
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand img {
+  width: 36px;
+  height: 36px;
+}
+.brand b {
+  font-weight: inherit;
+}
 .brand span {
   color: var(--accent);
 }
@@ -150,6 +162,23 @@ p {
 .hero h1 em {
   font-style: normal;
   color: var(--accent);
+}
+.hero-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: clamp(16px, 4vw, 56px);
+}
+.headshot {
+  display: block;
+  width: clamp(110px, 24vw, 320px);
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 22%;
+  border: 2px solid var(--ink);
+  box-shadow: clamp(6px, 1vw, 12px) clamp(6px, 1vw, 12px) 0 var(--fill);
+  margin-right: 12px;
 }
 .hero-grid {
   display: grid;
