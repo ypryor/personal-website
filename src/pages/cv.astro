@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+import { profile, cv, talks, guestLectures, talksArePlaceholder, publications } from '../data/site';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const showTalks = !talksArePlaceholder || import.meta.env.DEV;
+---
+
+<Base title="CV + Talks">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow"><b>●</b> Curriculum vitae</p>
+      <h1 class="page-title">CV + Talks</h1>
+      {
+        profile.cvPdf && (
+          <div class="btns">
+            <a class="btn" href={`${base}/${profile.cvPdf}`}>
+              Download full CV (PDF)
+            </a>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="cv-block">
+      <h2>Appointments</h2>
+      <ul class="rows">
+        {
+          cv.appointments.map((a) => (
+            <li>
+              <span>
+                <span class="t">{a.title}</span>
+                <span class="w">{a.where}</span>
+              </span>
+              <span class="y">{a.when}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="cv-block">
+      <h2>Education</h2>
+      <ul class="rows">
+        {
+          cv.education.map((e) => (
+            <li>
+              <span>
+                <span class="t">{e.title}</span>
+                <span class="w">{e.where}</span>
+              </span>
+              <span class="y">{e.when}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    {
+      cv.awards.length > 0 && (
+        <section class="cv-block">
+          <h2>Awards</h2>
+          <ul class="rows">
+            {cv.awards.map((a) => (
+              <li>
+                <span class="t">{a.title}</span>
+                <span class="y">{a.when}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <section class="cv-block">
+      <h2>Publications</h2>
+      <ul class="rows">
+        {
+          publications.map((p) => (
+            <li>
+              <span>
+                <span class="t">{p.title}</span>
+                <span class="w">
+                  {p.authors} · {p.venue}
+                </span>
+              </span>
+              <span class="y">{p.year}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    {
+      showTalks && (
+        <section class="cv-block">
+          <h2>Selected presentations</h2>
+          <div>
+            {talksArePlaceholder && (
+              <p class="note">
+                Placeholder rows — visible only in local preview. Add real talks in src/data/site.ts and set
+                talksArePlaceholder to false.
+              </p>
+            )}
+            <ul class="rows">
+              {talks.map((t) => (
+                <li>
+                  <span>
+                    <span class="t">{t.title}</span>
+                    <span class="w">
+                      {t.venue}
+                      {t.note && ` · ${t.note}`}
+                    </span>
+                  </span>
+                  <span class="y">{t.year}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+
+    <section class="cv-block">
+      <h2>Guest lectures</h2>
+      <ul class="rows">
+        {
+          guestLectures.map((t) => (
+            <li>
+              <span>
+                <span class="t">{t.title}</span>
+                <span class="w">{t.venue}</span>
+              </span>
+              <span class="y">{t.year}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="cv-block">
+      <h2>Teaching + mentoring</h2>
+      <ul class="rows">
+        {
+          cv.teaching.map((t) => (
+            <li>
+              <span>
+                <span class="t">{t.title}</span>
+                <span class="w">{t.where}</span>
+              </span>
+              <span class="y">{t.when}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+  </div>
+</Base>

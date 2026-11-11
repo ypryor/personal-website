@@ -1,0 +1,36 @@
+---
+import type { Publication } from '../data/site';
+interface Props {
+  items: Publication[];
+}
+const { items } = Astro.props;
+---
+
+<ol class="pubs">
+  {
+    items.map((p) => (
+      <li class="pub">
+        <div>
+          <div class="pub-year">{p.year}</div>
+          <span class={`tag ${p.status === 'Published' ? 'published' : ''}`}>{p.status}</span>
+        </div>
+        <div>
+          <h3>{p.title}</h3>
+          <p class="pub-meta">
+            <Fragment set:html={p.authors.replace('Pryor Y', '<b>Pryor Y</b>')} /> · <i>{p.venue}</i>
+          </p>
+          {p.summary && <p class="summary">{p.summary}</p>}
+          <ul class="chips">
+            {p.links.map((l) => (
+              <li>
+                <a href={l.href} rel="noopener">
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </li>
+    ))
+  }
+</ol>

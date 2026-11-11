@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import PubList from '../components/PubList.astro';
+import { publications } from '../data/site';
+---
+
+<Base title="Publications">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow"><b>●</b> Papers, preprints and data</p>
+      <h1 class="page-title">Publications</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <PubList items={publications} />
+    </div>
+  </section>
+</Base>
