@@ -18,7 +18,7 @@ const band = [
   <section class="hero">
     <div class="wrap">
       <p class="eyebrow">
-        <b>●</b> Genetic Historian · {profile.role} · {profile.lab} · {profile.institution}
+        <b>●</b> Genetic Historian · {profile.role} · <a href={profile.labUrl} rel="noopener">{profile.lab}</a> · {profile.institution}
       </p>
       <div class="hero-top">
         <h1>Yemko<br /><em>Pryor</em></h1>
@@ -32,7 +32,7 @@ const band = [
       </div>
 
       <div class="hero-grid">
-        <p class="tagline">DNA is a <mark>historical document.</mark> I use pigmentation to understand how human variation changes through time.</p>
+        <p class="tagline">DNA is a <mark>historical document.</mark> I integrate genetic data and historical archives to understand how human variation changes through time.</p>
         <div>
           <p class="lede">{profile.statement}</p>
           <div class="btns">

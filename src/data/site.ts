@@ -8,7 +8,7 @@ export const profile = {
   suffix: 'PhD',
   role: 'Postdoctoral Researcher',
   lab: 'Lasisi Lab',
-  labUrl: '', // not shown anywhere yet
+  labUrl: 'https://lasisilab.com/',
   institution: 'University of Michigan',
   location: 'Ann Arbor, MI',
   tagline: 'DNA is a historical document.',

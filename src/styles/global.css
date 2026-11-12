@@ -110,8 +110,8 @@ p {
   gap: 10px;
 }
 .brand img {
-  width: 36px;
-  height: 36px;
+  width: auto;
+  height: 44px;
 }
 .brand b {
   font-weight: inherit;
@@ -613,4 +613,15 @@ p {
     flex-direction: column;
     gap: 2px;
   }
+}
+
+.eyebrow a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--fill);
+}
+.eyebrow a:hover {
+  color: var(--accent);
 }
