@@ -317,3 +317,156 @@ export const cv = {
     },
   ],
 };
+
+export type Feature = {
+  year: string;
+  kind: string;
+  title: string;
+  outlet: string;
+  summary?: string;
+  links: { label: string; href: string }[];
+};
+
+// Press, profiles and interviews, newest first.
+export const media: Feature[] = [
+  {
+    year: '2026',
+    kind: 'Award',
+    title: 'Yemko Pryor Receives Outstanding Postdoctoral Fellow Award',
+    outlet: 'U-M Ecology and Evolutionary Biology',
+    summary:
+      'A profile marking the 2026 Outstanding Postdoctoral Fellow Award, covering current work on the genetics of human pigmentation alongside teaching and community engagement.',
+    links: [
+      {
+        label: 'Read the profile',
+        href: 'https://lsa.umich.edu/eeb/news-events/all-news/search-news/yemko-pryor-receives-outstanding-postdoctoral-fellow-award.html',
+      },
+    ],
+  },
+  {
+    year: '2026',
+    kind: 'Award',
+    title: 'Postdoctoral fellows, faculty mentors recognized',
+    outlet: 'The University Record, University of Michigan',
+    summary:
+      'Coverage of the Outstanding Postdoctoral Fellow Awards, which recognize excellence across research, teaching, mentoring, service and leadership.',
+    links: [
+      {
+        label: 'Read the article',
+        href: 'https://record.umich.edu/articles/postdoctoral-fellows-faculty-mentors-recognized/',
+      },
+    ],
+  },
+  {
+    year: '2025',
+    kind: 'Research news',
+    title: 'Epigenetics linked to high-altitude adaptation in Andes',
+    outlet: 'Emory News',
+    summary:
+      'A news feature on the first whole-methylome data from the Kichwa of the Ecuadorian Andes and the Ashaninka of the Amazon Basin, and what DNA methylation may contribute to long-standing human adaptation.',
+    links: [
+      {
+        label: 'Read the article',
+        href: 'https://news.emory.edu/stories/2025/11/epigenetics-linked-high-altitude-adaptation-andes',
+      },
+    ],
+  },
+  {
+    year: '2024',
+    kind: 'Profile',
+    title: 'Student Spotlight: Meet Yemko Pryor',
+    outlet: 'Emory Genetics and Molecular Biology Program',
+    summary:
+      'A featured scientist spotlight on bringing a genetics perspective into biological anthropology and studying the evolutionary histories of Indigenous populations in South America.',
+    links: [
+      {
+        label: 'Read the spotlight',
+        href: 'https://biomed.emory.edu/PROGRAM_SITES/GMB/news-events/featured-scientist/',
+      },
+    ],
+  },
+  {
+    year: '2024',
+    kind: 'Community',
+    title: 'Top Priorities and Growing Complexities for Some LGBTQ Voters',
+    outlet: 'GLAAD',
+    summary:
+      'Coverage of GLAAD Media Institute listening and coaching sessions with activists and community leaders at Atlanta City Hall, including work building community for queer graduate students at Emory.',
+    links: [
+      {
+        label: 'Read the article',
+        href: 'https://glaad.org/glaad-gmi-atlanta-activists-training-development-listening-session/',
+      },
+    ],
+  },
+  {
+    year: '2021',
+    kind: 'Profile',
+    title: 'Oberlin Science Scholar Explores Ancient DNA at Emory and Howard Universities',
+    outlet: 'Oberlin College and Conservatory',
+    summary:
+      'An alumni profile tracing the path from a double major in biology and Africana studies to doctoral research in ancient DNA.',
+    links: [
+      {
+        label: 'Read the profile',
+        href: 'https://www.oberlin.edu/news/oberlin-science-scholar-explores-ancient-dna-emory-and-howard-universities',
+      },
+    ],
+  },
+  {
+    year: '2020',
+    kind: 'Research news',
+    title: 'Ancient DNA lab maps little-explored human lineages',
+    outlet: 'Emory News',
+    summary:
+      'A feature on the Lindo ancient DNA lab, including work comparing coastal and high-altitude populations of ancient Peru.',
+    links: [
+      {
+        label: 'Read the feature',
+        href: 'https://news.emory.edu/features/2020/10/ancient-dna-lab-maps-little-explored-human-lineages',
+      },
+    ],
+  },
+  {
+    year: '2019',
+    kind: 'Interview',
+    title: 'I Am Abel',
+    outlet: 'Chicago Access Network Television (CAN TV)',
+    summary: 'A television interview with Dr. Conway about research, recorded in Chicago in July 2019.',
+    links: [{ label: 'Watch the interview', href: 'https://www.youtube.com/watch?v=e6TCWTI_FrI' }],
+  },
+  {
+    year: '2018',
+    kind: 'Profile',
+    title: 'Alumni Perspectives: Yemko Pryor ’14',
+    outlet: 'Francis W. Parker School, Chicago',
+    summary:
+      'An alumni interview on how interests in biology and Africana studies first took shape and where they led after Oberlin.',
+    links: [{ label: 'Read the interview', href: 'https://www.fwparker.org/alumni-perspectives/yemko-pryor-14' }],
+  },
+];
+
+export type Outreach = {
+  when: string;
+  org: string;
+  role: string;
+  body: string;
+  links: { label: string; href: string }[];
+};
+
+export const outreach: Outreach[] = [
+  {
+    when: '2026–present',
+    org: 'African American Cultural and Historical Museum of Washtenaw County (AACHM)',
+    role: 'Museum volunteer · Woodlawn Cemetery restoration volunteer',
+    body: 'I volunteer at the museum, which runs primarily on volunteers, staffing the front desk to help keep its doors open. Through the museum I joined the Woodlawn Cemetery restoration effort, a community-led project to uncover and archive the headstones of a historically Black cemetery in Ypsilanti. At listening sessions I record the stories and concerns of residents and descendants for the executive committee, so that restoration proceeds on the community’s terms.',
+    links: [{ label: 'Visit AACHM', href: 'https://www.aachm.org/' }],
+  },
+  {
+    when: '',
+    org: 'MI DNA Day',
+    role: 'Volunteer scientist',
+    body: 'I volunteer with MI DNA Day, a statewide program that brings scientists into Michigan high school classrooms to teach hands-on lessons about genetics and to talk with students about what a career in science can look like.',
+    links: [],
+  },
+];

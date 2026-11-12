@@ -450,14 +450,14 @@ p {
   padding: 0;
   counter-reset: stop;
 }
-.path li {
+.path > li {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
   gap: clamp(16px, 4vw, 56px);
   padding-block: 28px;
   border-top: 2px solid var(--line);
 }
-.path li:first-child {
+.path > li:first-child {
   border-top: 0;
   padding-top: 0;
 }
@@ -592,7 +592,7 @@ p {
   .hero-grid,
   .two,
   .cv-block,
-  .path li {
+  .path > li {
     grid-template-columns: 1fr;
   }
   .scales {

@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import { outreach } from '../data/site';
+---
+
+<Base title="Outreach" description="Community and public engagement work by Yemko Pryor, PhD.">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow"><b>●</b> Community and public engagement</p>
+      <h1 class="page-title">Outreach</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <ol class="path">
+        {
+          outreach.map((o) => (
+            <li>
+              <div>
+                <h3>{o.org}</h3>
+                <div class="what">{o.role}</div>
+                {o.when && <div class="what">{o.when}</div>}
+              </div>
+              <div>
+                <p>{o.body}</p>
+                {o.links.length > 0 && (
+                  <ul class="chips" style="margin-top:14px">
+                    {o.links.map((l) => (
+                      <li>
+                        <a href={l.href} rel="noopener">
+                          {l.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</Base>

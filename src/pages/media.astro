@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { media } from '../data/site';
+---
+
+<Base title="Media" description="Press coverage, profiles and interviews featuring Yemko Pryor, PhD.">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow"><b>●</b> Press, profiles and interviews</p>
+      <h1 class="page-title">Media</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <ol class="pubs">
+        {
+          media.map((m) => (
+            <li class="pub">
+              <div>
+                <div class="pub-year">{m.year}</div>
+                <span class="tag">{m.kind}</span>
+              </div>
+              <div>
+                <h3>{m.title}</h3>
+                <p class="pub-meta">
+                  <i>{m.outlet}</i>
+                </p>
+                {m.summary && <p class="summary">{m.summary}</p>}
+                <ul class="chips">
+                  {m.links.map((l) => (
+                    <li>
+                      <a href={l.href} rel="noopener">
+                        {l.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</Base>
