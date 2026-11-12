@@ -26,7 +26,7 @@ export const profile = {
 };
 
 export const centralGoal =
-  'Using a combined historical genetics approach to distinguish between human biological variation and the social and political systems built around its interpretation.';
+  'Using an integrated historical and genetic approach to understand human biological variation and the social and political systems built around its interpretation.';
 
 // `short` is the home page card; `title`, `kicker` and `body` are the longer
 // version on the Research page, which each home card links to by `id`.
@@ -50,7 +50,7 @@ export const scales = [
     title: 'Population',
     kicker: 'Admixture through time',
     body:
-      'Population history is complex, but many approaches to studying it rely on simplified models of population structure and ancestry. I extend these approaches to highly admixed, recently diverged populations, asking how population history and a gene’s position within the melanogenesis network jointly shape evolutionary constraint and adaptation.',
+      'Population history is complex, and the ways we model it influence the evolutionary patterns we can recover. I investigate how migration, admixture, and population structure shape genetic variation, and how population history and a gene’s position within the melanogenesis network jointly influence evolutionary constraint and adaptation.',
     short: {
       label: 'Evolutionary',
       question: 'How does variation change?',
