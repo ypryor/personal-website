@@ -13,7 +13,7 @@ export const profile = {
   location: 'Ann Arbor, MI',
   tagline: 'DNA is a historical document.',
   statement:
-    'I am a genetic historian studying how migration, admixture, and social history shape human variation. By reading DNA alongside the written historical record, I use skin pigmentation—a highly variable and evolutionarily dynamic trait—as a model for understanding how populations change as they come together.',
+    'I am a genetic historian interested in how migration, admixture, and social history shape human variation. My research brings together population genetics, evolutionary biology, and historical inquiry to understand how human populations have changed through time. I use skin pigmentation as one model for exploring these relationships, investigating how evolutionary and demographic processes leave their imprint on patterns of human genetic variation.',
   // Shown in the footer. Set to '' to hide.
   email: 'ypryor@umich.edu',
   links: {
