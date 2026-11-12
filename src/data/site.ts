@@ -234,7 +234,7 @@ export const guestLectures: Talk[] = [
   {
     year: '2026',
     title: 'Beyond racial categories: what genetics tells us about skin and hair variation, and why it matters for health',
-    venue: 'MCDB 401, Department of Molecular, Cellular, and Developmental Biology, University of Michigan',
+    venue: 'Advanced Topics (MCDB 401), Department of Molecular, Cellular, and Developmental Biology, University of Michigan',
   },
   {
     year: '2025',
