@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { scales, centralQuestion, path, methods } from '../data/site';
+import { scales, centralGoal, path, methods } from '../data/site';
 ---
 
 <Base title="Research">
@@ -85,7 +85,7 @@ import { scales, centralQuestion, path, methods } from '../data/site';
       <div class="section-head">
         <h2>Three scales</h2>
       </div>
-      <p class="central-q">{centralQuestion}</p>
+      <p class="central-q">{centralGoal}</p>
       <div class="scales">
         {
           scales.map((s) => (

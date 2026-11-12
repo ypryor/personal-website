@@ -25,8 +25,8 @@ export const profile = {
   cvPdf: 'Yemko_Pryor_CV.pdf',
 };
 
-export const centralQuestion =
-  'How has human biological variation evolved, how has it moved through populations, and how have societies assigned meaning and consequence to it?';
+export const centralGoal =
+  'Using a combined historical genetics approach to distinguish between human biological variation and the social and political systems built around its interpretation.';
 
 // `short` is the home page card; `title`, `kicker` and `body` are the longer
 // version on the Research page, which each home card links to by `id`.
@@ -50,7 +50,7 @@ export const scales = [
     title: 'Population',
     kicker: 'Admixture through time',
     body:
-      'Many population-history methods were developed for ancient, well-separated groups. I extend these approaches to highly admixed, recently diverged populations, asking how demographic history and a gene’s position within the melanogenesis network jointly shape evolutionary constraint and adaptation. I am particularly interested in how these processes challenge conventional approaches to defining and studying human populations.',
+      'Population history is complex, but many approaches to studying it rely on simplified models of population structure and ancestry. I extend these approaches to highly admixed, recently diverged populations, asking how population history and a gene’s position within the melanogenesis network jointly shape evolutionary constraint and adaptation.',
     short: {
       label: 'Evolutionary',
       question: 'How does variation change?',
