@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PubList from '../components/PubList.astro';
-import { profile, scales, publications, methods } from '../data/site';
+import { profile, scales, centralQuestion, publications, methods } from '../data/site';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const band = [
   'Human variation',
@@ -56,15 +56,17 @@ const band = [
         <h2>One question,<br />three scales</h2>
         <a href={`${base}/research/`}>Full research interests →</a>
       </div>
+      <p class="central-q">{centralQuestion}</p>
       <div class="scales">
         {
           scales.map((s) => (
-            <article class="scale">
+            <a class="scale" href={`${base}/research/#${s.id}`}>
               <div class="num">{s.n}</div>
-              <div class="kicker">{s.kicker}</div>
-              <h3>{s.title}</h3>
-              <p>{s.body}</p>
-            </article>
+              <div class="kicker">{s.short.label}</div>
+              <h3>{s.short.question}</h3>
+              <p>{s.short.blurb}</p>
+              <span class="more">Read more →</span>
+            </a>
           ))
         }
       </div>

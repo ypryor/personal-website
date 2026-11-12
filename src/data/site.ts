@@ -25,27 +25,51 @@ export const profile = {
   cvPdf: 'Yemko_Pryor_CV.pdf',
 };
 
+export const centralQuestion =
+  'How has human biological variation evolved, how has it moved through populations, and how have societies assigned meaning and consequence to it?';
+
+// `short` is the home page card; `title`, `kicker` and `body` are the longer
+// version on the Research page, which each home card links to by `id`.
 export const scales = [
   {
     n: '01',
+    id: 'trait',
     title: 'Trait',
     kicker: 'Pigmentation as a model',
     body:
-      'Skin pigmentation is a dynamic, complex trait that I have studied for years. It varies more than almost any other human trait, so it captures the upper bounds of human variation and tracks how that variation moves in actively admixing populations.',
+      'Skin pigmentation is a dynamic, complex trait that I have studied for years. Its remarkable variation makes it a powerful model for understanding human genetic diversity and tracing how evolutionary processes shape variation in actively admixing populations. Yet pigmentation is more than a biological trait; it is also a visible characteristic through which societies have historically constructed racial categories and assigned social meaning.',
+    short: {
+      label: 'Biological',
+      question: 'What is human variation?',
+      blurb: 'Pigmentation as a model for understanding the evolution and distribution of human genetic diversity.',
+    },
   },
   {
     n: '02',
+    id: 'population',
     title: 'Population',
     kicker: 'Admixture through time',
     body:
-      'Most population-history methods were built for old, well-separated groups. I extend them to highly admixed, recently diverged populations, and ask how a gene’s place in the melanogenesis network and a population’s history together shape constraint and adaptation.',
+      'Many population-history methods were developed for ancient, well-separated groups. I extend these approaches to highly admixed, recently diverged populations, asking how demographic history and a gene’s position within the melanogenesis network jointly shape evolutionary constraint and adaptation. I am particularly interested in how these processes challenge conventional approaches to defining and studying human populations.',
+    short: {
+      label: 'Evolutionary',
+      question: 'How does variation change?',
+      blurb: 'Migration, admixture, population structure, selection, and evolutionary constraint.',
+    },
   },
   {
     n: '03',
+    id: 'historical',
     title: 'Historical',
     kicker: 'Genomes ↔ archives',
     body:
-      'DNA is a historical document, and it says the most when read next to actual ones. I pair historical and modern genomes with legal codes and archival records to ask how moments in history redirected admixture and variation.',
+      'DNA is a historical document, but it tells us the most when read alongside the written record. I bring genomic data together with historical archives, legal codes, and documentary evidence to investigate how migration, admixture, and historical systems of racial classification have shaped our understanding of human variation—and how historical events have redirected population histories.',
+    short: {
+      label: 'Historical and social',
+      question: 'What have humans made of that variation?',
+      blurb:
+        'The historical construction of racial categories, color-based hierarchies, legal classifications, and the ways these systems have shaped people’s lives and the historical records available to us.',
+    },
   },
 ];
 
