@@ -232,6 +232,11 @@ export const talks: Talk[] = [
 
 export const guestLectures: Talk[] = [
   {
+    year: '2026',
+    title: 'Beyond racial categories: what genetics tells us about skin and hair variation, and why it matters for health',
+    venue: 'MCDB 401, Department of Molecular, Cellular, and Developmental Biology, University of Michigan',
+  },
+  {
     year: '2025',
     title: 'Epigenomic and genomic approaches to high-altitude adaptation in Indigenous Andean populations',
     venue: 'Department of Biology Speaker Series, Oberlin College',
