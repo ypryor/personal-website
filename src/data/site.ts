@@ -29,7 +29,7 @@ export const profile = {
   // Contact form. Leave '' to have the form open the visitor's own email app.
   // Paste a form-service address here (for example a Formspree form URL) to
   // have messages delivered without the visitor leaving the page.
-  contactEndpoint: '',
+  contactEndpoint: 'https://formspree.io/f/xnpddggj',
   contactNote:
     'I welcome messages about faculty searches, collaborations, speaking invitations and community partnerships.',
 };

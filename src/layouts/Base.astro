@@ -113,6 +113,8 @@ const links = Object.entries(profile.links).filter(([, url]) => url);
           <div class="full">
             <button type="submit">Send message</button>
           </div>
+          {
+            !profile.contactEndpoint && (
           <div class="send-options full" id="send-options" hidden>
             <p>Choose how to send your message:</p>
             <div class="send-row">
@@ -122,6 +124,9 @@ const links = Object.entries(profile.links).filter(([, url]) => url);
               <button class="send-opt" type="button" data-via="copy">Copy message</button>
             </div>
           </div>
+            )
+          }
+          <input type="hidden" name="_subject" value="New message from yemkopryor.com" />
           <p class="status full" role="status" aria-live="polite"></p>
         </form>
       </section>
