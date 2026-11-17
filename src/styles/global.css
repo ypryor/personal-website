@@ -1227,3 +1227,40 @@ main.blocks > .page-head > .wrap {
     opacity: 0.12;
   }
 }
+
+/* Contact form: choose how to send */
+.send-options {
+  border: 2px solid var(--ink);
+  padding: 16px 18px 18px;
+  background: var(--paper-2);
+}
+.send-options[hidden] {
+  display: none;
+}
+.send-options p {
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+.send-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.cb-form .send-opt {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 18px;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+}
+.cb-form .send-opt:hover {
+  background: var(--ink);
+  color: var(--paper);
+}

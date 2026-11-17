@@ -113,6 +113,15 @@ const links = Object.entries(profile.links).filter(([, url]) => url);
           <div class="full">
             <button type="submit">Send message</button>
           </div>
+          <div class="send-options full" id="send-options" hidden>
+            <p>Choose how to send your message:</p>
+            <div class="send-row">
+              <a class="send-opt" data-via="gmail" target="_blank" rel="noopener">Gmail</a>
+              <a class="send-opt" data-via="outlook" target="_blank" rel="noopener">Outlook</a>
+              <a class="send-opt" data-via="app">My email app</a>
+              <button class="send-opt" type="button" data-via="copy">Copy message</button>
+            </div>
+          </div>
           <p class="status full" role="status" aria-live="polite"></p>
         </form>
       </section>
@@ -132,14 +141,37 @@ const links = Object.entries(profile.links).filter(([, url]) => url);
           }
           var to = form.getAttribute('data-mailto');
           if (to) {
-            // No form service configured: open the visitor's own email app.
+            // No form service configured: let the visitor pick how to send.
             e.preventDefault();
             var name = (data.get('first_name') + ' ' + data.get('last_name')).trim();
             var org = data.get('organization');
+            var subject = 'Website message from ' + name;
             var body = data.get('message') + '\n\n' + name + (org ? '\n' + org : '') + '\n' + data.get('email');
-            window.location.href =
-              'mailto:' + to + '?subject=' + encodeURIComponent('Website message from ' + name) + '&body=' + encodeURIComponent(body);
-            status.textContent = 'Your email app should open with the message ready to send.';
+            var q = encodeURIComponent;
+            var urls = {
+              gmail: 'https://mail.google.com/mail/?view=cm&fs=1&to=' + q(to) + '&su=' + q(subject) + '&body=' + q(body),
+              outlook: 'https://outlook.office.com/mail/deeplink/compose?to=' + q(to) + '&subject=' + q(subject) + '&body=' + q(body),
+              app: 'mailto:' + to + '?subject=' + q(subject) + '&body=' + q(body),
+            };
+            var box = document.getElementById('send-options');
+            box.querySelectorAll('a.send-opt').forEach(function (a) {
+              a.href = urls[a.getAttribute('data-via')];
+            });
+            var copy = box.querySelector('[data-via="copy"]');
+            copy.onclick = function () {
+              var text = 'To: ' + to + '\nSubject: ' + subject + '\n\n' + body;
+              navigator.clipboard.writeText(text).then(
+                function () {
+                  status.textContent = 'Copied. Paste it into any email to ' + to + '.';
+                },
+                function () {
+                  status.textContent = 'Could not copy. Please email ' + to + ' directly.';
+                }
+              );
+            };
+            box.hidden = false;
+            status.textContent = '';
+            box.querySelector('a.send-opt').focus();
             return;
           }
           // Form service configured: send without leaving the page.
