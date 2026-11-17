@@ -360,6 +360,15 @@ export type Feature = {
 export const media: Feature[] = [
   {
     year: '2026',
+    kind: 'Fellowship',
+    title: 'Michigan Pioneer Fellows: Our Scholars',
+    outlet: 'Michigan Pioneer Fellows Program, University of Michigan',
+    summary:
+      'A scholar profile in the 2026 Pioneer Fellows cohort, describing research on how social history and life-course experience become written into human genetic and epigenetic variation.',
+    links: [{ label: 'View the profile', href: 'https://pioneerfellows.umich.edu/our-scholars/' }],
+  },
+  {
+    year: '2026',
     kind: 'Award',
     title: 'Yemko Pryor Receives Outstanding Postdoctoral Fellow Award',
     outlet: 'U-M Ecology and Evolutionary Biology',
