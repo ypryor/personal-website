@@ -1264,3 +1264,32 @@ main.blocks > .page-head > .wrap {
   background: var(--ink);
   color: var(--paper);
 }
+
+/* Faded logo in the home page name block */
+.cb-name {
+  position: relative;
+  overflow: hidden;
+}
+.cb-name::after {
+  content: '';
+  position: absolute;
+  right: clamp(12px, 3vw, 40px);
+  top: clamp(16px, 3vw, 36px);
+  height: min(62%, 340px);
+  aspect-ratio: 707 / 797;
+  background: url('/logo-ink-large.png') center / contain no-repeat;
+  opacity: 0.16;
+  pointer-events: none;
+}
+.cb-name > * {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 820px) {
+  .cb-name::after {
+    right: -10%;
+    top: 12px;
+    height: 46%;
+    opacity: 0.12;
+  }
+}
