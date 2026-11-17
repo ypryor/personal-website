@@ -23,7 +23,49 @@ export const profile = {
   } as Record<string, string>,
   // File in public/. Set to '' to hide the download button.
   cvPdf: 'Yemko_Pryor_CV.pdf',
+  // Home page intro under the name.
+  intro:
+    'I am a genetic historian interested in how migration, admixture, and social history shape human variation. My research brings together population genetics, evolutionary biology, and historical inquiry to understand how human populations have changed through time.',
+  // Contact form. Leave '' to have the form open the visitor's own email app.
+  // Paste a form-service address here (for example a Formspree form URL) to
+  // have messages delivered without the visitor leaving the page.
+  contactEndpoint: '',
+  contactNote:
+    'I welcome messages about faculty searches, collaborations, speaking invitations and community partnerships.',
 };
+
+// Home page "how connected" blocks.
+export const connections = [
+  {
+    title: 'Trained at',
+    items: [
+      { name: 'University of Michigan', detail: 'Postdoctoral Researcher, Lasisi Lab, 2025 to present' },
+      { name: 'Emory University', detail: 'PhD, Genetics and Molecular Biology, Lindo Lab, 2019 to 2025' },
+      { name: 'University of Chicago', detail: 'Postbaccalaureate researcher, 2018 to 2019' },
+      { name: 'Oberlin College', detail: 'BA, Biology and Africana Studies, 2014 to 2018' },
+    ],
+  },
+  {
+    title: 'Funded and recognized by',
+    items: [
+      { name: 'Michigan Pioneer Fellowship', detail: '2026' },
+      { name: 'Outstanding Postdoctoral Fellow Award', detail: 'University of Michigan, 2026' },
+      { name: 'NSF Graduate Research Fellowship', detail: '2022 to 2025' },
+      { name: 'Ford Foundation Predoctoral Fellowship', detail: '2021 to 2022' },
+    ],
+  },
+  {
+    title: 'In the community and the press',
+    items: [
+      {
+        name: 'African American Cultural and Historical Museum of Washtenaw County',
+        detail: 'Museum and Woodlawn Cemetery restoration volunteer',
+      },
+      { name: 'MI DNA Day', detail: 'Volunteer scientist' },
+      { name: 'Featured by', detail: 'Emory News, The University Record, Oberlin College, GLAAD' },
+    ],
+  },
+];
 
 export const centralGoal =
   'Using an integrated historical and genetic approach to understand human biological variation and the social and political systems built around its interpretation.';
@@ -505,6 +547,38 @@ export const outreach: Outreach[] = [
     org: 'MI DNA Day',
     role: 'Volunteer scientist',
     body: 'I volunteer with MI DNA Day, a statewide program that brings scientists into Michigan high school classrooms to teach hands-on lessons about genetics and to talk with students about what a career in science can look like.',
+    links: [],
+  },
+];
+
+// Shown on the Outreach + Mentorship page. Students are deliberately not named.
+export const mentorship: Outreach[] = [
+  {
+    when: '2025–present',
+    org: 'Research mentorship at the University of Michigan',
+    role: 'Research supervisor · Honors thesis mentor',
+    body: 'In the Lasisi Lab I supervise four undergraduate researchers, one through the Undergraduate Research Opportunity Program (UROP), and have mentored two honors theses. I train students in both wet-lab and computational methods.',
+    links: [],
+  },
+  {
+    when: '2020–2025',
+    org: 'Research mentorship at Emory University',
+    role: 'Lab research mentor · Honors thesis mentor',
+    body: 'As a doctoral student in the Lindo Lab I mentored five undergraduates in lab research and outreach, two of them through honors theses, and served as a lab mentor to two doctoral students in the Department of Anthropology.',
+    links: [],
+  },
+  {
+    when: '2019–2022',
+    org: 'Emory Initiative for Maximizing Student Development (IMSD)',
+    role: 'Undergraduate mentor',
+    body: 'I served as an undergraduate mentor in Emory’s IMSD program, which supports students from groups underrepresented in biomedical research.',
+    links: [],
+  },
+  {
+    when: 'Summer 2023',
+    org: 'LGS-SOAR, Laney Graduate School, Emory University',
+    role: 'Program coordinator',
+    body: 'I coordinated the summer research program’s orientation and classroom sessions, lectured on professional development, and guided students through poster and abstract submission for the summer symposium.',
     links: [],
   },
 ];

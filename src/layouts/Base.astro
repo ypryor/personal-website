@@ -14,7 +14,7 @@ const nav = [
   { label: 'Research', path: '/research/' },
   { label: 'Publications', path: '/publications/' },
   { label: 'Media', path: '/media/' },
-  { label: 'Outreach', path: '/outreach/' },
+  { label: 'Outreach + Mentorship', path: '/outreach/' },
   { label: 'CV + Talks', path: '/cv/' },
 ];
 const pageTitle = title ? `${title} · ${profile.name}` : `${profile.name}, ${profile.suffix}`;
@@ -37,7 +37,7 @@ const links = Object.entries(profile.links).filter(([, url]) => url);
     <header class="site-header">
       <div class="wrap">
         <a class="brand" href={href('/')}>
-          <img src={href('/logo.png')} alt="" width="39" height="44" />
+          <img src={href('/logo-cream.png')} alt="" width="39" height="44" />
           <b>Yemko Pryor, PhD<span>.</span></b>
         </a>
         <nav class="nav" aria-label="Main">
@@ -52,42 +52,110 @@ const links = Object.entries(profile.links).filter(([, url]) => url);
       </div>
     </header>
 
-    <main>
+    <main class="blocks">
       <slot />
     </main>
 
-    <footer class="site-footer">
-      <div class="wrap">
-        <h2>Let’s talk.</h2>
-        <div class="foot-grid">
-          <div>
-            {profile.role}, {profile.lab}<br />
-            {profile.institution} · {profile.location}
+    <footer class="cb-footer">
+      <section id="contact" class="cb-contact">
+        <div class="cb-talk">
+          <h2>Let’s<br />Chat.</h2>
+          <p class="cb-note">{profile.contactNote}</p>
+          <div class="where">
+            <p class="loc">{profile.location.replace(', MI', ', Michigan')}</p>
             {
-              profile.email && (
-                <>
-                  <br />
-                  <a href={`mailto:${profile.email}`}>{profile.email}</a>
-                </>
+              links.length > 0 && (
+                <ul>
+                  {links.map(([label, url]) => (
+                    <li>
+                      <a href={url} rel="me noopener">
+                        {label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               )
             }
           </div>
-          {
-            links.length > 0 && (
-              <ul class="foot-links">
-                {links.map(([label, url]) => (
-                  <li>
-                    <a href={url} rel="me noopener">
-                      {label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )
-          }
         </div>
-        <p class="fine">© {new Date().getFullYear()} {profile.name}</p>
-      </div>
+
+        <form
+          class="cb-form"
+          id="contact-form"
+          method="post"
+          action={profile.contactEndpoint || undefined}
+          data-mailto={profile.contactEndpoint ? undefined : profile.email}
+        >
+          <div class="f">
+            <label for="cf-first">First name</label>
+            <input id="cf-first" name="first_name" type="text" autocomplete="given-name" required />
+          </div>
+          <div class="f">
+            <label for="cf-last">Last name</label>
+            <input id="cf-last" name="last_name" type="text" autocomplete="family-name" required />
+          </div>
+          <div class="f full">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="f full">
+            <label for="cf-org">Institution or organization (optional)</label>
+            <input id="cf-org" name="organization" type="text" autocomplete="organization" />
+          </div>
+          <div class="f full">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" rows="5" required></textarea>
+          </div>
+          <div class="hp" aria-hidden="true">
+            <label for="cf-site">Leave this field empty</label>
+            <input id="cf-site" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <div class="full">
+            <button type="submit">Send message</button>
+          </div>
+          <p class="status full" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+      <p class="cb-fine">© {new Date().getFullYear()} {profile.name}</p>
     </footer>
+
+    <script is:inline>
+      (function () {
+        var form = document.getElementById('contact-form');
+        if (!form) return;
+        var status = form.querySelector('.status');
+        form.addEventListener('submit', function (e) {
+          var data = new FormData(form);
+          if (data.get('_gotcha')) {
+            e.preventDefault();
+            return;
+          }
+          var to = form.getAttribute('data-mailto');
+          if (to) {
+            // No form service configured: open the visitor's own email app.
+            e.preventDefault();
+            var name = (data.get('first_name') + ' ' + data.get('last_name')).trim();
+            var org = data.get('organization');
+            var body = data.get('message') + '\n\n' + name + (org ? '\n' + org : '') + '\n' + data.get('email');
+            window.location.href =
+              'mailto:' + to + '?subject=' + encodeURIComponent('Website message from ' + name) + '&body=' + encodeURIComponent(body);
+            status.textContent = 'Your email app should open with the message ready to send.';
+            return;
+          }
+          // Form service configured: send without leaving the page.
+          e.preventDefault();
+          status.textContent = 'Sending…';
+          fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+            .then(function (r) {
+              if (!r.ok) throw new Error('send failed');
+              form.reset();
+              status.textContent = 'Thank you. Your message was sent.';
+            })
+            .catch(function () {
+              status.textContent = 'Sorry, the message could not be sent. Please try again later.';
+            });
+        });
+      })();
+    </script>
   </body>
 </html>

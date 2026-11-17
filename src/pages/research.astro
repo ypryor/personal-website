@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { scales, centralGoal, path, methods } from '../data/site';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <Base title="Research">
@@ -17,12 +18,17 @@ import { scales, centralGoal, path, methods } from '../data/site';
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap two">
+  <section class="section quote-block">
+    <div class="wrap quote-row">
       <p class="big-quote">
-        I am a <em>genetic historian.</em> I read DNA as a historical document.
+        As a <em>genetic historian,</em><br />I read <mark>DNA as a historical document.</mark>
       </p>
-      <div class="prose">
+    </div>
+  </section>
+
+  <section class="section prose-block" style={`--wm: url(${base}/logo-cream-large.png)`}>
+    <div class="wrap">
+      <div class="prose solo">
         <p>
           As a genetic historian, I use DNA to study human history, with a particular interest in what
           happens when populations that were once separated come together. Human populations have always

@@ -1,21 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
-import { outreach } from '../data/site';
+import { outreach, mentorship } from '../data/site';
+const groups = [
+  { title: 'Community', items: outreach },
+  { title: 'Mentorship', items: mentorship },
+];
 ---
 
-<Base title="Outreach" description="Community and public engagement work by Yemko Pryor, PhD.">
+<Base title="Outreach + Mentorship" description="Community engagement and mentorship by Yemko Pryor, PhD.">
   <section class="page-head">
     <div class="wrap">
-      <p class="eyebrow"><b>●</b> Community and public engagement</p>
-      <h1 class="page-title">Outreach</h1>
+      <p class="eyebrow"><b>●</b> Community engagement and training</p>
+      <h1 class="page-title">Outreach +<br />Mentorship</h1>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
+  {
+    groups.map((g) => (
+      <section class="section">
+        <div class="wrap">
+          <h2 class="out-head">{g.title}</h2>
       <ol class="path">
         {
-          outreach.map((o) => (
+          g.items.map((o) => (
             <li>
               <div>
                 <h3>{o.org}</h3>
@@ -40,6 +47,8 @@ import { outreach } from '../data/site';
           ))
         }
       </ol>
-    </div>
-  </section>
+        </div>
+      </section>
+    ))
+  }
 </Base>
